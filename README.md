@@ -1,10 +1,10 @@
-# java8 seed gastos
+# POC Proyecto1. (Designs)
 ====
 
+### Database postgresql
 
-base de datos
-
-postgres
-docker run --name db-gastos -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=gastos -p 5432:5432 -d postgres
+```
+docker run --name designs-db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=dev -p 5433:5432 -d postgres
+```
 
 

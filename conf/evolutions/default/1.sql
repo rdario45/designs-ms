@@ -1,15 +1,18 @@
 # --- Creation of events table
 
 # --- !Ups
-CREATE TABLE public.gastos (
+CREATE TABLE designs (
 	id serial NOT NULL,
-	titulo varchar(50) NOT NULL,
-	tipo varchar(20) NOT NULL,
-	descripcion varchar(100) NULL,
-	valor numeric(12,2) NOT NULL,
+	nombre varchar(100) NOT NULL,
+	autor varchar(100) NOT NULL,
+	precio numeric(10,2) NOT NULL,
+	filename varchar(200) NULL,
+	original BYTEA NULL,
+	procesado BYTEA NULL,
+	estado varchar(20) NOT NULL,
 	fecha timestamp NOT NULL
 );
-COMMENT ON TABLE public.gastos IS 'almacena los gastos';
+COMMENT ON TABLE designs IS 'Almacena los diseños';
 
 # --- !Downs
-drop table public.gastos;
+drop table pictures;
