@@ -1,7 +1,5 @@
 package controllers.dto;
 
-import java.io.File;
-
 public class DesignDTO {
 
     private int id;
@@ -16,6 +14,14 @@ public class DesignDTO {
 
     public DesignDTO() {
         // to json serialize
+    }
+
+    public DesignDTO(String nombre, String autor, String precio, String fileName, String original) {
+        this.nombre = nombre;
+        this.autor = autor;
+        this.precio = precio;
+        this.fileName = fileName;
+        this.original = original;
     }
 
     public DesignDTO(int id, String nombre, String autor, String precio, String fileName, String original, String procesado, String estado, String fecha) {
