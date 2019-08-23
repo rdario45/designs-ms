@@ -100,4 +100,10 @@ public class Design {
     public void setFecha(DateTime fecha) {
         this.fecha = fecha;
     }
+
+    public Design asignarProcesado(File procesado) {
+        this.procesado = procesado;
+        this.estado = Estado.DISPONIBLE;
+        return this;
+    }
 }

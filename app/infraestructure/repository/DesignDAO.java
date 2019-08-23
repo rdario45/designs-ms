@@ -40,10 +40,10 @@ public interface DesignDAO {
       "nombre = :r.nombre, " +
       "autor = :r.autor, " +
       "precio = :r.precio, " +
-      "filename = :r.filename, " +
-      "original = :r.original " +
-      "procesado = :r.procesado " +
-      "estado = :r.estado " +
+      "filename = :r.fileName, " +
+      "original = :r.original, " +
+      "procesado = :r.procesado, " +
+      "estado = :r.estado, " +
       "fecha = :r.fecha " +
       "WHERE id = :r.id RETURNING *")
     DesignRecord update(@BindBean("r") DesignRecord record);

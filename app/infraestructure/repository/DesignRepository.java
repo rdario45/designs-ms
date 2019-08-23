@@ -1,13 +1,15 @@
 package infraestructure.repository;
 
-import com.google.inject.Inject;
 import domain.Design;
 import infraestructure.acl.DesignMapper;
 import io.vavr.collection.List;
 import io.vavr.concurrent.Future;
 import io.vavr.control.Option;
 import org.skife.jdbi.v2.DBI;
+import play.Logger;
 import play.api.db.Database;
+
+import javax.inject.Inject;
 
 public class DesignRepository {
 
@@ -37,7 +39,7 @@ public class DesignRepository {
   public Future<Option<Design>> update(Design design) {
     DesignRecord record = DesignMapper.designToRecord(design);
     return Future.of(() -> Option.of(db.onDemand(DesignDAO.class).update(record))
-      .map(DesignMapper::recordToDesign));
+      .map(DesignMapper::recordToDesign)).onFailure(throwable -> Logger.error("error", throwable) );
   }
 
 }

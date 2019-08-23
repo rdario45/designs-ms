@@ -70,7 +70,6 @@ public class DesignsController {
     private Either<List<String>, DesignDTO> createDesignDTO(TemporaryFile file, String fileName, String nombre, String autor, String precio) {
         return Try.of(() -> {
             Path path = file.copyTo(Paths.get(fileName), true); // TODO check
-            Logger.info(path.toString());
             return new DesignDTO( nombre, autor, precio, fileName, path.toString());
         }).onFailure(throwable -> Logger.error("invalid", throwable))
           .toEither(List.of("invalid"));

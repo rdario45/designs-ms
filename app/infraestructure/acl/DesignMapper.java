@@ -8,6 +8,8 @@ import infraestructure.repository.DesignRecord;
 import io.vavr.control.Try;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import play.Logger;
+
 import play.libs.Json;
 
 import java.io.File;
@@ -47,14 +49,15 @@ public class DesignMapper {
           design.getPrecio(),
           design.getFileName(),
           original.getOrNull(),
-          null,
+          procesado.getOrNull(),
           design.getEstado().name(),
           new Timestamp(design.getFecha().getMillis())
         );
     }
 
     private static Try<byte[]> getBytesFromFile(File file) {
-        return Try.of(() -> IOUtils.toByteArray(new FileInputStream(file)));
+        return Try.of(() -> IOUtils.toByteArray(new FileInputStream(file))
+        ).onFailure(throwable -> Logger.error("error", throwable));
     }
 
     public static Design recordToDesign(DesignRecord record) {
@@ -75,11 +78,13 @@ public class DesignMapper {
 
     private static Try<File> getFileFromBytes(String fileName, byte[] bytes) {
         return Try.of(() -> {
-            File file = new File(fileName); // TODO check side effect.
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(bytes);
+            File temp = File.createTempFile(fileName, ".tmp");
+            FileOutputStream fos = new FileOutputStream(temp);
+            if (bytes != null) {
+                fos.write(bytes);
+            }
             fos.close();
-            return file;
-        });
+            return temp;
+        }).onFailure(throwable -> Logger.error("error", throwable));
     }
 }
