@@ -8,6 +8,6 @@ public class TareasProgramadas extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(ChronProcesarArchivos.class).asEagerSingleton();
+//        bind(ChronProcesarArchivos.class).asEagerSingleton();
     }
 }

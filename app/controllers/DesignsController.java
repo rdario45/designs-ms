@@ -45,15 +45,15 @@ public class DesignsController {
           .fold(Results::notFound, Results::ok);
     }
 
-        public Result create() {
-            Http.MultipartFormData<TemporaryFile> body = request().body().asMultipartFormData();
-            Http.MultipartFormData.FilePart<TemporaryFile> picture = body.getFile("picture");
-            Map<String, String[]> stringMap = body.asFormUrlEncoded();
+    public Result create() {
+        Http.MultipartFormData<TemporaryFile> body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart<TemporaryFile> picture = body.getFile("picture");
+        Map<String, String[]> stringMap = body.asFormUrlEncoded();
 
-            TemporaryFile file = picture.getRef();
-            String fileName = picture.getFilename();
-            String nombre = Option.of(stringMap.get("nombre")).map(List::of).map(List::peek).getOrNull();
-            String autor = Option.of(stringMap.get("autor")).map(List::of).map(List::peek).getOrNull();
+        TemporaryFile file = picture.getRef();
+        String fileName = picture.getFilename();
+        String nombre = Option.of(stringMap.get("nombre")).map(List::of).map(List::peek).getOrNull();
+        String autor = Option.of(stringMap.get("autor")).map(List::of).map(List::peek).getOrNull();
         String precio = Option.of(stringMap.get("precio")).map(List::of).map(List::peek).getOrNull();
 
         return createDesignDTO(file, fileName, nombre, autor, precio)

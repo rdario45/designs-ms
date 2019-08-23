@@ -25,7 +25,8 @@ public class TaskProcesarArchivos {
     public void execute(){
         Logger.info("********** INICIA LA TAREA PROGRAMADA ************");
         List<Design> enProceso = repository.listAll().filter(design -> design.getEstado() == Estado.EN_PROCESO);
-        List<Future<Option<Design>>> map = enProceso.map(this::procesarImagen).map(repository::update);
+        enProceso.forEach(design -> Logger.debug("- "+design.getFileName()));
+        enProceso.map(this::procesarImagen).map(repository::update);
         Logger.info("**********  FINALIZA LA TAREA PROGRAMADA ********** ");
     }
 
